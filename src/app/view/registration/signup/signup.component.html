@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title>Inscription</mat-card-title>
+  <mat-card-content>
+    <form>
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Email" />
+				</mat-form-field>
+				<mat-form-field>
+						<input matInput type="password" placeholder="Password" />
+					</mat-form-field>
+      </div>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Nom" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Prénom" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Favorite team</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let club of clubs">
+            {{ club.Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button color="primary" mat-raised-button>Inscription</button>
+    </form>
+  </mat-card-content>
+</mat-card>
