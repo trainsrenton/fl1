@@ -9,7 +9,6 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // MATERIAL
-import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 
 //APP
@@ -34,10 +33,7 @@ import { environment } from 'src/environments/environment';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    MatMenuModule,
-    MatButtonModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     Fl1coreModule
   ],
