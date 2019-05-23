@@ -1,37 +1,48 @@
-<div *ngIf="auth.user | async; then authenticated else guest">
-    <!-- template will replace this div -->
-</div>
+<div *ngIf="auth.user | async; then authenticated; else guest"></div>
 
 <ng-template #guest>
-  <mat-card>
-    <mat-card-title>Connexion</mat-card-title>
-    <mat-card-content>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Email" />
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="password" placeholder="Password" />
-      </mat-form-field>
-      <div class="form-group">
-          <button color="primary" mat-raised-button>
+  <form [formGroup]="formSignin" (ngSubmit)="emailSignIn()">
+    <mat-card>
+      <mat-card-title>Connexion</mat-card-title>
+      <mat-card-content>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            placeholder="Email"
+            formControlName="email"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </mat-form-field>
+        <div class="form-group">
+          <button color="primary" mat-raised-button type="submit">
             Connexion
           </button>
         </div>
-      <div class="form-group">
-        <button color="accent" mat-raised-button (click)="authSocial.googleLogin()">
-          Googgle connect
-        </button>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</ng-template>
-
-<ng-template #authenticated>
-    <div *ngIf="auth.user | async as user">
-        <h3>Howdy, {{ user.displayName }}</h3>
-        <img  [src]="user.photoURL">
-        <p>UID: {{ user.uid }}</p>
-        <p>Favorite Color: {{ user?.favoriteColor }} </p>
-        <button (click)="auth.signOut()">Logout</button>
-    </div>
+        <div class="form-group">
+          <button
+            color="accent"
+            mat-raised-button
+            (click)="authSocial.googleLogin()"
+          >
+            Googgle connect
+          </button>
+          <button
+            color="accent"
+            mat-raised-button
+            (click)="authSocial.facebookLogin()"
+          >
+            facebook connect
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
 </ng-template>

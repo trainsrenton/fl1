@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   signUp() {
-    this.auth.emailSignup(
+    this.auth.emailSignUp(
       this.email.value,
       this.password.value,
       this.pseudo.value,

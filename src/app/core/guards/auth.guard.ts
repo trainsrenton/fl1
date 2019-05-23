@@ -7,29 +7,27 @@ import {
 } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 
-import { Observable } from 'rxjs';
-import { tap, map, take } from 'rxjs/operators';
+import { Observable } from "rxjs";
+import { tap, map, take } from "rxjs/operators";
+import { auth } from "firebase";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
-  
+
+  user;
+
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
-      
-    return this.auth.user.pipe(
-      take(1),
-      map(user => !!user),
-      tap(loggedIn => {
-        if (!loggedIn) {
-          console.log("acces refuse");
-          this.router.navigate(["/registration/signin"]);
-        }
-      })
-    )
-      
+    state: RouterStateSnapshot
+  ): boolean{
+
+    if(!this.auth.currentUser.profileCompleted){
+      this.router.navigate(["/registration/signup"]);
+      return false
+    }
+    
   }
 }

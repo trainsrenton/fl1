@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthSocialsService } from 'src/app/core/services/auth-socials.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { auth } from 'firebase';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -10,9 +12,26 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class SigninComponent implements OnInit {
 
-  constructor(public auth:AuthService, public authSocial:AuthSocialsService) {  }
+  formSignin: FormGroup;
+
+  constructor(public auth:AuthService, public authSocial:AuthSocialsService, private fb:FormBuilder) {  }
 
   ngOnInit() {
+    this.formSignin = this.fb.group({
+      email:[""],
+      password: [""]
+    })
+  }
+
+  get email() {
+    return this.formSignin.get("email");
+  }
+  get password() {
+    return this.formSignin.get("password");
+  }
+
+  emailSignIn(){
+    this.auth.emailSignIn(this.email.value, this.password.value);
   }
 
 }
